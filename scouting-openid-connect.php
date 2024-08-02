@@ -8,11 +8,11 @@
  * @copyright  2024 Scouting Nederland
  * @license    GPLv3
  * @version    1.0.0
- * @link       https://github.com/Scouting-Nederland/WordPress-OIDC
+ * @link       https://github.com/Scouting-Nederland/OpenID-Connect-Wordpress
  *
  * @wordpress-plugin
  * Plugin Name:          Scouting OpenID Connect
- * Plugin URI:           https://github.com/Scouting-Nederland/WordPress-OIDC
+ * Plugin URI:           https://github.com/Scouting-Nederland/OpenID-Connect-Wordpress
  * Description:          WordPress plugin for logging in with Scouting Nederland OpenID Connect Server.
  * Version:              1.0.0
  * Requires at least:    6.4.3
