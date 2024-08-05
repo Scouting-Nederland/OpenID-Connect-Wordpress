@@ -57,4 +57,9 @@ Currently not, but this is planned for a future update of this plugin.
 == Changelog ==
 
 = 1.0.0 =
-* Initial release
+Initial release
+
+== Upgrade Notice ==
+
+= 1.0.0 =
+Initial release
