@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Scouting OpenID Connect 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/jobvk/scouting-openid-connect/"
 "issues\n"
-"POT-Creation-Date: 2024-08-02 16:20+0200\n"
-"PO-Revision-Date: 2024-08-02 16:20+0200\n"
+"POT-Creation-Date: 2024-08-07 23:08+0200\n"
+"PO-Revision-Date: 2024-08-07 23:08+0200\n"
 "Last-Translator: Job van Koeveringe <job.van.koeveringe@scouting.nl>\n"
 "Language-Team: Job van Koeveringe <job.van.koeveringe@scouting.nl>\n"
 "Language: nl_NL\n"
@@ -16,6 +16,7 @@ msgstr ""
 "X-Generator: Poedit 3.4.4\n"
 "X-Poedit-KeywordsList: __;esc_html__;_e;esc_html_e\n"
 "X-Poedit-Basepath: ../src\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: auth/OpenIDConnectClient.php:96
@@ -79,8 +80,8 @@ msgid "Scope"
 msgstr "Scope"
 
 #: auth/OpenIDConnectClient.php:345
-msgid "is not supported by the server supported scopes are:"
-msgstr "wordt niet ondersteund door de server ondersteunde scopes zijn:"
+msgid "is not supported by the server, supported scopes are:"
+msgstr "wordt niet ondersteund door de server, ondersteunde scopes zijn:"
 
 #: auth/OpenIDConnectClient.php:362
 msgid "Well known data is not available."
@@ -94,15 +95,15 @@ msgstr "De jwks_uri is niet beschikbaar in de bekende gegevens."
 msgid "The jwks_uri is not a valid URL."
 msgstr "De jwks_uri is geen geldige URL."
 
-#: auth/auth.php:34 auth/auth.php:71
+#: auth/auth.php:34 auth/auth.php:65
 msgid "Login with Scouts Online"
 msgstr "Inloggen met Scouts Online"
 
-#: auth/auth.php:137
+#: auth/auth.php:128
 msgid "Webmaster disabled creation of new accounts"
 msgstr "Webmaster heeft het aanmaken van nieuwe accounts uitgeschakeld"
 
-#: auth/auth.php:161
+#: auth/auth.php:150
 msgid "The user denied the request"
 msgstr "De gebruiker heeft het verzoek geweigerd"
 
@@ -202,35 +203,35 @@ msgstr "Scouting OpenID Connect Instellingen"
 msgid "Scouts Online (SOL) Profile Information"
 msgstr "Scouts Online (SOL) Profiel Informatie"
 
-#: user/fields.php:16
+#: user/fields.php:35
 msgid "Scouting ID"
 msgstr "Scouting ID"
 
-#: user/fields.php:26
+#: user/fields.php:51
 msgid "Birthdate"
 msgstr "Geboortedatum"
 
-#: user/fields.php:36
+#: user/fields.php:67
 msgid "Gender"
 msgstr "Geslacht"
 
-#: user/fields.php:39
+#: user/fields.php:70
 msgid "Male"
 msgstr "Man"
 
-#: user/fields.php:40
+#: user/fields.php:71
 msgid "Female"
 msgstr "Vrouw"
 
-#: user/fields.php:41
+#: user/fields.php:72
 msgid "Other"
 msgstr "Overige"
 
-#: user/fields.php:42
+#: user/fields.php:73
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: user/fields.php:62
+#: user/fields.php:102
 msgid "Infix"
 msgstr "Tussenvoegsel"
 
@@ -241,3 +242,7 @@ msgstr "Email scope ontbreekt"
 #: user/user.php:170
 msgid "Username and Email have different user ID"
 msgstr "Gebruikersnaam en Email hebben verschillende gebruikers-ID"
+
+#: user/user.php:196
+msgid "Something went wrong while trying to log in"
+msgstr "Er is iets misgegaan tijdens het inloggen"

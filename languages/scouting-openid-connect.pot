@@ -1,10 +1,11 @@
 # Copyright (C) 2024 Scouting Nederland
 # This file is distributed under the same license as the Scouting OpenID Connect plugin.
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Scouting OpenID Connect 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/jobvk/scouting-openid-connect/issues\n"
-"POT-Creation-Date: 2024-08-02 16:20+0200\n"
+"POT-Creation-Date: 2024-08-07 23:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Job van Koeveringe <job.van.koeveringe@scouting.nl>\n"
@@ -14,6 +15,7 @@ msgstr ""
 "X-Generator: Poedit 3.4.4\n"
 "X-Poedit-KeywordsList: __;esc_html__;_e;esc_html_e\n"
 "X-Poedit-Basepath: ../src\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: auth/OpenIDConnectClient.php:96
@@ -77,7 +79,7 @@ msgid "Scope"
 msgstr ""
 
 #: auth/OpenIDConnectClient.php:345
-msgid "is not supported by the server supported scopes are:"
+msgid "is not supported by the server, supported scopes are:"
 msgstr ""
 
 #: auth/OpenIDConnectClient.php:362
@@ -92,15 +94,15 @@ msgstr ""
 msgid "The jwks_uri is not a valid URL."
 msgstr ""
 
-#: auth/auth.php:34 auth/auth.php:71
+#: auth/auth.php:34 auth/auth.php:65
 msgid "Login with Scouts Online"
 msgstr ""
 
-#: auth/auth.php:137
+#: auth/auth.php:128
 msgid "Webmaster disabled creation of new accounts"
 msgstr ""
 
-#: auth/auth.php:161
+#: auth/auth.php:150
 msgid "The user denied the request"
 msgstr ""
 
@@ -200,35 +202,35 @@ msgstr ""
 msgid "Scouts Online (SOL) Profile Information"
 msgstr ""
 
-#: user/fields.php:16
+#: user/fields.php:35
 msgid "Scouting ID"
 msgstr ""
 
-#: user/fields.php:26
+#: user/fields.php:51
 msgid "Birthdate"
 msgstr ""
 
-#: user/fields.php:36
+#: user/fields.php:67
 msgid "Gender"
 msgstr ""
 
-#: user/fields.php:39
+#: user/fields.php:70
 msgid "Male"
 msgstr ""
 
-#: user/fields.php:40
+#: user/fields.php:71
 msgid "Female"
 msgstr ""
 
-#: user/fields.php:41
+#: user/fields.php:72
 msgid "Other"
 msgstr ""
 
-#: user/fields.php:42
+#: user/fields.php:73
 msgid "Unknown"
 msgstr ""
 
-#: user/fields.php:62
+#: user/fields.php:102
 msgid "Infix"
 msgstr ""
 
@@ -238,4 +240,8 @@ msgstr ""
 
 #: user/user.php:170
 msgid "Username and Email have different user ID"
+msgstr ""
+
+#: user/user.php:196
+msgid "Something went wrong while trying to log in"
 msgstr ""
