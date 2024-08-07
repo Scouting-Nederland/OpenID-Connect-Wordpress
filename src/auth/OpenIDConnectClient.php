@@ -342,7 +342,7 @@ class OpenIDConnectClient
         if (isset($this->wellKnownData->scopes_supported)) {
             foreach ($scopes_array as $scope) {
                 if (!in_array($scope, $this->wellKnownData->scopes_supported)) {
-                    throw new OpenIDConnectClientException(esc_html__('Scope', 'scouting-openid-connect') . ' '. esc_html($scope) . ' ' . esc_html__('is not supported by the server supported scopes are:', 'scouting-openid-connect') . ' ' . implode(', ', array_map('esc_html', $this->wellKnownData->scopes_supported)));
+                    throw new OpenIDConnectClientException(esc_html__('Scope', 'scouting-openid-connect') . ' '. esc_html($scope) . ' ' . esc_html__('is not supported by the server, supported scopes are:', 'scouting-openid-connect') . ' ' . implode(', ', array_map('esc_html', $this->wellKnownData->scopes_supported)));
                 }
             }
         }

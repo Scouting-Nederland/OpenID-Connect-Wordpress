@@ -21,18 +21,57 @@ class Auth {
 
     // Add the OpenID Connect button to the login form
     public function scouting_oidc_login_form() {
-        $response_type = 'code';
-        $scopes = explode(" ", get_option('scouting_oidc_scopes'));
+        // Divider HTML
+        $divider_html = '<hr id="scouding-oidc-divider" style="border-top: 2px solid #8c8f94; border-radius: 4px;"/>';
+        
+        // Icon URL
+        $icon_url = $this->get_icon_url();
 
-        // Add divider to the login form to separate the default login form from the OpenID Connect button
-        echo '<hr id="scouding-oidc-divider" style="border-top: 2px solid #8c8f94; border-radius: 4px;"/>';
+        // OpenID Connect button URL
+        $oidc_url = $this->get_login_url();
 
-        // Add the OpenID Connect button to the login form
-        echo '<div id="scouting-oidc-login-div" style="margin: 16px 0px; width: 100%; height: 40px;">';
-        echo '<a id="scouting-oidc-login-link" href="' . esc_url($this->oidc_client->getAuthenticationURL($response_type, $scopes)) . '" style="display: -webkit-box; display: -ms-flexbox; display: -webkit-flex; display: flex; justify-content: center; align-items: center; background-color: #4CAF50; color: #ffffff; border: none; border-radius: 4px; text-decoration: none; font-weight: bold; width: 100%; height: 100%; text-align: center;">';
-        echo '<img id="scouting-oidc-login-img" src="' . esc_url(plugins_url('../../assets/icon.svg', __FILE__)) . '" alt="Scouting NL Logo" style="width: 40px; height: 40px; margin-right: 10px;">';
-        echo '<span id="scouting-oidc-login-text">' . esc_html__('Login with Scouts Online', 'scouting-openid-connect') . '</span>';
-        echo '</a></div>';
+        // Button style
+        $button_style = 'display: -webkit-box; display: -ms-flexbox; display: -webkit-flex; display: flex; justify-content: center; align-items: center; background-color: #4CAF50; color: #ffffff; border: none; border-radius: 4px; text-decoration: none; font-weight: bold; width: 100%; height: 100%; text-align: center;';
+        
+        // Button HTML
+        $button_html = <<<HTML
+        <div id="scouting-oidc-login-div" style="margin: 16px 0px; width: 100%; height: 40px;">
+            <a id="scouting-oidc-login-link" href="$oidc_url" style="$button_style">
+                <img id="scouting-oidc-login-img" src="$icon_url" alt="Scouting NL Logo" style="width: 40px; height: 40px; margin-right: 10px;">
+                <span id="scouting-oidc-login-text">{$this->get_login_text()}</span>
+            </a>
+        </div>
+        HTML;
+
+        // Define allowed HTML tags and attributes
+        $allowed_html = array(
+            'hr' => array(
+                'id' => true,
+                'style' => true,
+            ),
+            'div' => array(
+                'id' => true,
+                'style' => true,
+            ),
+            'a' => array(
+                'id' => true,
+                'href' => true,
+                'style' => true,
+            ),
+            'img' => array(
+                'id' => true,
+                'src' => true,
+                'alt' => true,
+                'style' => true,
+            ),
+            'span' => array(
+                'id' => true,
+            ),
+        );
+        
+        // Output HTML
+        echo wp_kses($divider_html, $allowed_html);
+        echo wp_kses($button_html, $allowed_html);
     }
 
     // Create shortcode with a login button
@@ -49,37 +88,46 @@ class Auth {
             'scouting_oidc_button' // Name of your shortcode
        );
 
-        $response_type = 'code';
-        $scopes = explode(" ", get_option('scouting_oidc_scopes'));
+        // Ensure minimal button dimensions
+        $atts['width'] = max(120, intval($atts['width']));
+        $atts['height'] = max(40, intval($atts['height']));
+
+        // Icon URL
+        $icon_url = $this->get_icon_url();
+
+        // OpenID Connect button URL
+        $oidc_url = $this->get_login_url();
+
+        // Div style
+        $width = esc_attr($atts['width']);
+        $height = esc_attr($atts['height']);
+
+        // Button style
+        $button_style = "display: flex; justify-content: center; align-items: center; background-color: " . esc_attr($atts['background_color']) . "; color: " . esc_attr($atts['text_color']) . "; border: none; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; width: 100%; height: 100%; text-align: center;";
         
-        // Minimal width of the button is 120px
-        if (intval($atts['width']) < 120) {
-            $atts['width'] = '120';
-        }
-
-        // Minimal height of the button is 40px
-        if (intval($atts['height']) < 40) {
-            $atts['height'] = '40';
-        }
-
-        $button_html = '<div id="scouting-oidc-login-div" style="min-width: 120px; width: ' . esc_attr($atts['width']) . 'px; min-height: 40px; height: ' . esc_attr($atts['height']) . 'px;">';
-        $button_html .= '<a id="scouting-oidc-login-link" href="' . $this->oidc_client->getAuthenticationURL($response_type, $scopes) . '" style="display: -webkit-box; display: -ms-flexbox; display: -webkit-flex; display: flex; justify-content: center; align-items: center; background-color: ' . esc_attr($atts['background_color']) . '; color: ' . esc_attr($atts['text_color']) . ';  border: none; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: bold; width: 100%; height: 100%; text-align: center;">';
-        // If width is smaller than 225px, the image will not be displayed
+        $button_html = <<<HTML
+        <div id="scouting-oidc-login-div" style="min-width: 120px; width: {$width}px; min-height: 40px; height: {$height}px;">
+            <a id="scouting-oidc-login-link" href="$oidc_url" style="$button_style">
+        HTML;
+        
         if (intval($atts['width']) >= 225) {
-            $button_html .= '<img id="scouting-oidc-login-img" src="' . plugins_url('../../assets/icon.svg', __FILE__) . '" alt="Scouting NL Logo" style="width: 40px; height: 40px; margin-right: 10px;">';
+            $button_html .= <<<HTML
+                <img id="scouting-oidc-login-img" src="$icon_url" alt="Scouting NL Logo" style="width: 40px; height: 40px; margin-right: 10px;">
+        HTML;
         }
-        $button_html .= '<span id="scouting-oidc-login-text">' . __('Login with Scouts Online', 'scouting-openid-connect') . '</span>';
-        $button_html .= '</a></div>';
+        
+        $button_html .= <<<HTML
+                <span id="scouting-oidc-login-text">{$this->get_login_text()}</span>
+            </a>
+        </div>
+        HTML;
 
         return $button_html;
     }
 
     // Create shortcode with the OpenID Authentication URL
     public function scouting_oidc_login_url_shortcode() {
-        $response_type = 'code';
-        $scopes = explode(" ", get_option('scouting_oidc_scopes'));
-
-        return $this->oidc_client->getAuthenticationURL($response_type, $scopes);
+        return $this->get_login_url();
     }
 
     // Callback to login with OpenID Connect
@@ -96,7 +144,7 @@ class Auth {
         // Check if 'error' and 'error_description' parameter is set in the URL
         if (isset($_GET['error_description']) && isset($_GET['hint']) && isset($_GET['message'])) {
             $this->oidc_client->unsetStateAndNonce();
-            wp_redirect(wp_login_url() . '?error_description=' . $_GET['error_description'] . '&hint=' . $_GET['hint'] . '&message=' . $_GET['message']);
+            wp_safe_redirect(wp_login_url() . '?error_description=' . $_GET['error_description'] . '&hint=' . $_GET['hint'] . '&message=' . $_GET['message']);
             exit;
         }
 
@@ -134,12 +182,10 @@ class Auth {
                 $user->createUser();
                 $user->loginUser();
             } else {
-                wp_redirect(wp_login_url() . '?error_description=error&hint=' . __("Webmaster disabled creation of new accounts", "scouting-openid-connect") . '&message=disabled_auto_create');
+                wp_safe_redirect(wp_login_url() . '?error_description=error&hint=' . __("Webmaster disabled creation of new accounts", "scouting-openid-connect") . '&message=disabled_auto_create');
                 exit;
             }
         }
-
-        $this->scouting_oidc_login_redirect();
     }
 
     // Callback after failed login
@@ -165,12 +211,12 @@ class Auth {
     }
 
     // Redirect after login based on settings
-    private function scouting_oidc_login_redirect() {
+    public function scouting_oidc_login_redirect() {
         if (get_option('scouting_oidc_login_redirect') == "dashboard") {
-            wp_redirect(admin_url());
+            wp_safe_redirect(admin_url());
             exit;
-        } else {
-            wp_redirect(home_url());
+        } else if (get_option('scouting_oidc_login_redirect') == "frontpage") {
+            wp_safe_redirect(home_url());
             exit;
         }
     }
@@ -180,6 +226,23 @@ class Auth {
         $logout_url = $this->oidc_client->getLogoutUrl();
         wp_redirect($logout_url);
         exit;
+    }
+
+    // Helper function to get the icon URL
+    private function get_icon_url() {
+        return esc_url(plugins_url('../../assets/icon.svg', __FILE__));
+    }
+
+    // Helper function to get the login URL
+    private function get_login_url() {
+        $response_type = 'code';
+        $scopes = explode(" ", get_option('scouting_oidc_scopes'));
+        return esc_url($this->oidc_client->getAuthenticationURL($response_type, $scopes));
+    }
+
+    // Helper function to get the login text
+    private function get_login_text() {
+        return esc_html__('Login with Scouts Online', 'scouting-openid-connect');
     }
 }
 ?>

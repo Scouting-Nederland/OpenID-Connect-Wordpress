@@ -23,7 +23,7 @@ function scouting_oidc_settings_install() {
 	update_option('scouting_oidc_user_scouting_id', false);
 	update_option('scouting_oidc_user_name_prefix', 'sn_');
 	update_option('scouting_oidc_user_auto_create', true);
-	update_option('scouting_oidc_login_redirect', 'default');
+	update_option('scouting_oidc_login_redirect', 'frontpage');
 }
 
 // Callback to render settings page content

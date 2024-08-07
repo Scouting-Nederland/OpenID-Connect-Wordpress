@@ -68,7 +68,7 @@ class User {
         $this->birthdate = $user_json_decoded['birthdate'] ?? "";
 
         if ($this->email == null) {
-            wp_redirect(wp_login_url() . '?error_description=error&hint=' . __("Email scope is missing", "scouting-openid-connect") . '&message=email_is_missing');
+            wp_safe_redirect(wp_login_url() . '?error_description=error&hint=' . __("Email scope is missing", "scouting-openid-connect") . '&message=email_is_missing');
             exit;
         }
     }
@@ -167,7 +167,7 @@ class User {
                 $user = $user_username;
             }
             else {
-                wp_redirect(wp_login_url() . '?error_description=error&hint=' . __("Username and Email have different user ID", "scouting-openid-connect") . '&message=login_email_mismatch');
+                wp_safe_redirect(wp_login_url() . '?error_description=error&hint=' . __("Username and Email have different user ID", "scouting-openid-connect") . '&message=login_email_mismatch');
                 exit;
             }
         }
@@ -193,14 +193,13 @@ class User {
         $user = get_user_by('login', $this->userName);
 
         if (!$user) {
-            return false;
+            wp_safe_redirect(wp_login_url() . '?error_description=error&hint=' . __("Something went wrong while trying to log in", "scouting-openid-connect") . '&message=login_email_mismatch');
+            exit;
         }
 
         wp_set_current_user($user->ID, $user->user_login);
         wp_set_auth_cookie($user->ID);
         do_action('wp_login', $user->user_login);
-
-        return true;
     }
 }
 ?>

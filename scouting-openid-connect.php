@@ -82,6 +82,15 @@ add_filter('login_message', array($auth, 'scouting_oidc_login_failed'));
 // Modify plugin description
 add_filter('all_plugins', 'scouting_oidc_modify_plugin_description');
 
+// Add display to safe style css for user profile fields
+add_filter( 'safe_style_css', function( $styles ) {
+    $styles[] = 'display';
+    return $styles;
+} );
+
+// add login redirect
+add_action('wp_login', array($auth, 'scouting_oidc_login_redirect'));
+
 // add logout redirect
 add_action('wp_logout', array($auth, 'scouting_oidc_logout_redirect'));
 
